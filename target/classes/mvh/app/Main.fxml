@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvh.app.MainController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Load" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+               <items>
+            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#helpPopUp" text="About MvHMapEditor" />
+               </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="529.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
+      <items>
+        <AnchorPane prefHeight="550.0" prefWidth="250.0">
+          <children>
+            <Label alignment="CENTER" layoutX="68.0" layoutY="14.0" minWidth="60.0" style="&#10;" text="World" textAlignment="CENTER" wrapText="false">
+              <font>
+                <Font name="System Bold" size="22.0" fx:id="x1" />
+              </font>
+            </Label>
+                  <Label layoutX="40.0" layoutY="55.0" text="Rows" />
+                  <Label layoutX="21.0" layoutY="87.0" text="Columns" />
+                  <Label layoutX="20.0" layoutY="357.0" prefHeight="25.0" prefWidth="40.0" text="Symbol" />
+                  <Label layoutX="24.0" layoutY="394.0" prefHeight="25.0" prefWidth="40.0" text="Health" />
+                  <TextField fx:id="worldRows" layoutX="74.0" layoutY="51.0" prefHeight="25.0" prefWidth="79.0" promptText="rows" />
+                  <TextField fx:id="worldColumns" layoutX="74.0" layoutY="83.0" prefHeight="25.0" prefWidth="79.0" promptText="columns" />
+                  <RadioButton fx:id="selectHero" layoutX="55.0" layoutY="163.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="79.0" text="Hero" textFill="#4bdc60">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </RadioButton>
+                  <Button fx:id="createWorld" layoutX="74.0" layoutY="122.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="Create World">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+                  <RadioButton fx:id="selectMonster" layoutX="51.0" layoutY="330.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="88.0" text="Monster" textFill="#ef4f4f">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <Label layoutX="20.0" layoutY="201.0" text="Symbol" />
+                  <Label layoutX="20.0" layoutY="231.0" prefHeight="17.0" prefWidth="40.0" text="Health" />
+                  <Label layoutX="17.0" layoutY="262.0" prefHeight="25.0" prefWidth="46.0" text="Weapon" />
+                  <Label layoutX="21.0" layoutY="427.0" prefHeight="25.0" prefWidth="46.0" text="Weapon" />
+                  <Label layoutX="21.0" layoutY="294.0" prefHeight="25.0" prefWidth="46.0" text="Armor" />
+                  <TextField fx:id="heroSymbol" layoutX="74.0" layoutY="197.0" prefHeight="16.0" prefWidth="79.0" promptText="symbol" />
+                  <TextField fx:id="heroHealth" layoutX="74.0" layoutY="227.0" prefHeight="25.0" prefWidth="79.0" promptText="health" />
+                  <TextField fx:id="heroWeapon" layoutX="74.0" layoutY="262.0" prefHeight="25.0" prefWidth="79.0" promptText="strength" />
+                  <TextField fx:id="heroArmor" layoutX="74.0" layoutY="294.0" prefHeight="25.0" prefWidth="79.0" promptText="armor" />
+                  <TextField fx:id="monsterSymbol" layoutX="74.0" layoutY="357.0" prefHeight="25.0" prefWidth="79.0" promptText="symbol" />
+                  <TextField fx:id="monsterHealth" layoutX="71.0" layoutY="394.0" prefHeight="25.0" prefWidth="79.0" promptText="health" />
+                  <ComboBox fx:id="monsterWeapon" layoutX="74.0" layoutY="427.0" prefHeight="25.0" prefWidth="79.0" />
+                  <TextField fx:id="entityRow" layoutX="20.0" layoutY="471.0" prefHeight="25.0" prefWidth="79.0" promptText="Row Location">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="entityColumn" layoutX="106.0" layoutY="471.0" prefHeight="25.0" prefWidth="88.0" promptText="Column Location">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="addEntity" layoutX="66.0" layoutY="509.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="Add Entity" />
+          </children>
+        </AnchorPane>
+        <ScrollPane prefHeight="550.0" prefWidth="426.0">
+          <content>
+            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="547.0" prefWidth="441.0">
+                     <children>
+                        <Label layoutX="169.0" layoutY="14.0" text="Map View" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="worldMap" layoutX="24.0" layoutY="68.0" prefHeight="315.0" prefWidth="394.0" />
+                     </children>
+            </AnchorPane>
+          </content>
+        </ScrollPane>
+        <AnchorPane prefHeight="550.0" prefWidth="328.0">
+               <children>
+                  <Label layoutX="75.0" layoutY="14.0" text="Details" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="worldDetails" layoutX="19.0" layoutY="68.0" prefHeight="167.0" prefWidth="187.0" />
+               </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+      <children>
+        <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" prefHeight="16.0" prefWidth="62.0" text="Left status" HBox.hgrow="ALWAYS">
+          <font>
+            <Font size="11.0" fx:id="x3" />
+          </font>
+          <textFill>
+            <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
+          </textFill>
+        </Label>
+        <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
+        <Label font="$x3" maxWidth="-1.0" prefHeight="16.0" prefWidth="65.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
+      </children>
+      <padding>
+        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+      </padding>
+    </HBox>
+  </children>
+</VBox>
