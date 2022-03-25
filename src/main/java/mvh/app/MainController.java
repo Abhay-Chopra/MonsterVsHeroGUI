@@ -3,6 +3,7 @@ package mvh.app;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import mvh.world.*;
 
 public class MainController {
@@ -13,6 +14,10 @@ public class MainController {
     @FXML
     public void helpPopUp(ActionEvent actionEvent) {
         System.out.println("clicked on help");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About this Application");
+        alert.show();
+
     }
 
     @FXML
@@ -68,4 +73,45 @@ public class MainController {
 
     @FXML
     private TextField worldRows;
+
+    @FXML
+    private MenuItem fileLoad;
+
+    @FXML
+    private MenuItem fileQuit;
+
+    @FXML
+    private MenuItem fileSave;
+
+    @FXML
+    void loadFile(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+    }
+
+    @FXML
+    void saveFile(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialFileName("world.txt");
+        //TODO Handle save's and cancel
+    }
+
+    @FXML
+    void quitWindow(ActionEvent event) {
+
+    }
+
+    @FXML
+    void getDetails(ActionEvent event) {
+
+    }
+
+    @FXML
+    void monsterPicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void heroPicked(ActionEvent event) {
+
+    }
 }
