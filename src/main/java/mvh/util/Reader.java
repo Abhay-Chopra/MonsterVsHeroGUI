@@ -6,8 +6,8 @@ import mvh.world.Monster;
 import mvh.world.World;
 
 import java.io.*;
-//import java.util.NoSuchElementException;
-//import java.util.Scanner;
+
+//TODO Ask if invalid files should crash program or update status
 
 /**
  * Class to assist reading in world file
@@ -21,15 +21,15 @@ public final class Reader {
      * (Do not expect students to create anything near as robust as this file reading method!)
      * (A better design would also use sub-functions.)
      *
-     * @param fileWorld The world file to load
+     * @param worldFile The world file to load
      * @return A World created from the world file
      */
-    public static World loadWorld(File fileWorld){
+    public static World loadWorld(File worldFile){
         World world = null;
         //reconfirming that file can be accessed
-        if(fileWorld.isFile() && fileWorld.canRead() && fileWorld.exists()){
+        if(worldFile.isFile() && worldFile.canRead() && worldFile.exists()){
             //Try and Catch Block for reading from file (With-resources)
-            try(FileReader fileReader = new FileReader(fileWorld);
+            try(FileReader fileReader = new FileReader(worldFile);
                 BufferedReader bufferedReader = new BufferedReader(fileReader))
             {
                 //Reading from File
@@ -100,13 +100,16 @@ public final class Reader {
                 System.exit(1);
             }
             catch (FileNotFoundException e) {
-                System.err.println("Could not find file: " + fileWorld.getAbsolutePath());
+                System.err.println("Could not find file: " + worldFile.getAbsolutePath());
                 System.exit(1);
             } catch (IOException e) {
-                System.err.println("Could not close file: " + fileWorld.getAbsolutePath());
+                System.err.println("Could not close file: " + worldFile.getAbsolutePath());
                 System.exit(1);
             }
         }
         return world;
+    }
+    public static void saveFile(File worldFile){
+
     }
 }
