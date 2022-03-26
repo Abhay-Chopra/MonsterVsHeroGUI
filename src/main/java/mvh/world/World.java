@@ -1,6 +1,7 @@
 package mvh.world;
 
 import mvh.enums.Direction;
+import mvh.enums.Symbol;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -215,6 +216,55 @@ public class World {
      */
     public int getColumns(){
         return world[0].length;
+    }
+
+    /**
+     * Creating a string that represents and visualizes the current world
+     *
+     * @return String that contains a visualization of the world, including all entities represented by symbols
+     */
+    public String worldString(){
+        StringBuilder wall = new StringBuilder();
+        int rowLength = getRows();
+        int columnLength = getColumns();
+        //Added two to the length of one row, to get the top and bottom wall
+        wall.append(String.valueOf(Symbol.WALL.getSymbol()).repeat(columnLength + 2));
+        StringBuilder innerMap = new StringBuilder();
+        for(int row = 0; row < rowLength; row++)
+        {
+            //Left Wall in Row (Surrounding the left side of the world)
+            innerMap.append(Symbol.WALL.getSymbol());
+            for (int column = 0; column < columnLength; column++)
+            {
+                //Handling Floors
+                if(getEntity(row, column) == null)
+                {
+                    innerMap.append(Symbol.FLOOR.getSymbol());
+                }
+                //Handling Dead Entities
+                else if(getEntity(row, column).isDead())
+                {
+                    //Handling Non-Walls
+                    if(getEntity(row, column).canMoveOnTopOf())
+                    {
+                        innerMap.append(Symbol.DEAD.getSymbol());
+                    }
+                    //Handling Walls
+                    else
+                    {
+                        innerMap.append(Wall.getWall().getSymbol());
+                    }
+                }
+                //Handling Alive Entities
+                else if(getEntity(row, column).isAlive())
+                {
+                    innerMap.append(getEntity(row, column).getSymbol());
+                }
+            }
+            //Right Wall in Row (Surrounding the right side of the world)
+            innerMap.append(Symbol.WALL.getSymbol()).append("\n");
+        }
+        return String.format("%s\n%s%s\n", wall, innerMap, wall);
     }
 
 }

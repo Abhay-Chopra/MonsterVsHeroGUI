@@ -12,6 +12,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -25,14 +26,14 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem fx:id="fileLoad" mnemonicParsing="false" onAction="#loadFile" text="Load" />
-            <MenuItem fx:id="fileSave" mnemonicParsing="false" onAction="#saveFile" text="Save" />
-            <MenuItem fx:id="fileQuit" mnemonicParsing="false" onAction="#quitWindow" text="Quit" />
+            <MenuItem mnemonicParsing="false" onAction="#loadFile" text="Load" />
+            <MenuItem mnemonicParsing="false" onAction="#saveFile" text="Save" />
+            <MenuItem mnemonicParsing="false" onAction="#quitWindow" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
                <items>
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#helpPopUp" text="About MvHMapEditor" />
+            <MenuItem mnemonicParsing="false" onAction="#helpPopUp" text="About MvHMapEditor" />
                </items>
         </Menu>
       </menus>
@@ -50,19 +51,22 @@
                   <Label layoutX="21.0" layoutY="87.0" text="Columns" />
                   <Label layoutX="20.0" layoutY="393.0" prefHeight="25.0" prefWidth="40.0" text="Symbol" />
                   <Label layoutX="24.0" layoutY="431.0" prefHeight="25.0" prefWidth="40.0" text="Health" />
-                  <TextField fx:id="worldRows" layoutX="74.0" layoutY="51.0" prefHeight="25.0" prefWidth="79.0" promptText="0 to 25" />
-                  <TextField fx:id="worldColumns" layoutX="74.0" layoutY="83.0" prefHeight="25.0" prefWidth="79.0" promptText="0 to 25" />
-                  <RadioButton fx:id="selectHero" layoutX="55.0" layoutY="174.0" mnemonicParsing="false" onAction="#heroPicked" prefHeight="17.0" prefWidth="79.0" text="Hero" textFill="#4bdc60">
+                  <TextField fx:id="worldRows" layoutX="74.0" layoutY="51.0" prefHeight="25.0" prefWidth="79.0" promptText="0 to 15" />
+                  <TextField fx:id="worldColumns" layoutX="74.0" layoutY="83.0" prefHeight="25.0" prefWidth="79.0" promptText="0 to 15" />
+                  <RadioButton fx:id="selectHero" layoutX="55.0" layoutY="174.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="79.0" text="Hero" textFill="#4bdc60">
                      <font>
                         <Font size="15.0" />
                      </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="entityGroup" />
+                     </toggleGroup>
                   </RadioButton>
-                  <Button fx:id="createWorld" layoutX="74.0" layoutY="122.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="Create World">
+                  <Button layoutX="74.0" layoutY="122.0" mnemonicParsing="false" onAction="#createNewWorld" prefHeight="25.0" prefWidth="79.0" text="Create World">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Button>
-                  <RadioButton fx:id="selectMonster" layoutX="51.0" layoutY="355.0" mnemonicParsing="false" onAction="#monsterPicked" prefHeight="20.0" prefWidth="88.0" text="Monster" textFill="#ef4f4f">
+                  <RadioButton fx:id="selectMonster" layoutX="51.0" layoutY="355.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="88.0" text="Monster" textFill="#ef4f4f" toggleGroup="$entityGroup">
                      <font>
                         <Font size="14.0" />
                      </font>
