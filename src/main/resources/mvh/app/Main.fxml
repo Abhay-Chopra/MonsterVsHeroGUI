@@ -17,7 +17,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mvh.app.MainController">
@@ -38,11 +37,11 @@
         </Menu>
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="529.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="529.0" prefWidth="900.0" style="-fx-background-color: #1D1A05;" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane prefHeight="550.0" prefWidth="250.0">
+        <AnchorPane prefHeight="550.0" prefWidth="250.0" style="-fx-background-color: #A9ACA9;">
           <children>
-            <Label alignment="CENTER" layoutX="68.0" layoutY="14.0" minWidth="60.0" style="&#10;" text="World" textAlignment="CENTER" textFill="#2f3c7e" wrapText="false">
+            <Label alignment="CENTER" layoutX="68.0" layoutY="14.0" minWidth="60.0" style="&#10;" text="World" textAlignment="CENTER" textFill="#053c5e" wrapText="false">
               <font>
                 <Font name="System Bold" size="22.0" fx:id="x1" />
               </font>
@@ -53,7 +52,7 @@
                   <Label layoutX="24.0" layoutY="431.0" prefHeight="25.0" prefWidth="40.0" text="Health" />
                   <TextField fx:id="worldRows" layoutX="74.0" layoutY="51.0" prefHeight="25.0" prefWidth="79.0" promptText="0 to 15" />
                   <TextField fx:id="worldColumns" layoutX="74.0" layoutY="83.0" prefHeight="25.0" prefWidth="79.0" promptText="0 to 15" />
-                  <RadioButton fx:id="selectHero" layoutX="53.0" layoutY="175.0" mnemonicParsing="false" onAction="#heroSelected" prefHeight="21.0" prefWidth="94.0" text="Hero" textFill="#2f3c7e">
+                  <RadioButton fx:id="selectHero" layoutX="53.0" layoutY="175.0" mnemonicParsing="false" onAction="#heroSelected" prefHeight="21.0" prefWidth="94.0" text="Hero" textFill="#053c5e">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -82,14 +81,14 @@
                   <TextField fx:id="heroArmor" layoutX="74.0" layoutY="306.0" prefHeight="25.0" prefWidth="79.0" promptText="armor" />
                   <TextField fx:id="monsterSymbol" layoutX="71.0" layoutY="393.0" prefHeight="25.0" prefWidth="79.0" promptText="symbol" />
                   <TextField fx:id="monsterHealth" layoutX="71.0" layoutY="431.0" prefHeight="25.0" prefWidth="79.0" promptText="health" />
-                  <ComboBox fx:id="monsterWeapon" layoutX="71.0" layoutY="464.0" prefHeight="25.0" prefWidth="79.0" />
+                  <ComboBox fx:id="monsterWeapon" layoutX="71.0" layoutY="464.0" prefHeight="25.0" prefWidth="79.0" promptText="Type" />
           </children>
         </AnchorPane>
-        <ScrollPane prefHeight="550.0" prefWidth="426.0">
+        <ScrollPane prefHeight="550.0" prefWidth="426.0" style="-fx-background-color: #1D1A05;">
           <content>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="547.0" prefWidth="441.0">
+            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="547.0" prefWidth="441.0" style="-fx-background-color: #A9ACA9;">
                      <children>
-                        <Label layoutX="169.0" layoutY="14.0" text="Map View" textAlignment="CENTER" textFill="#2f3c7e">
+                        <Label layoutX="169.0" layoutY="14.0" text="Map View" textAlignment="CENTER" textFill="#053c5e">
                            <font>
                               <Font name="System Bold" size="22.0" />
                            </font>
@@ -105,14 +104,14 @@
                               <Font size="11.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="addEntity" layoutX="272.0" layoutY="472.0" mnemonicParsing="false" onAction="#addEntityToWorld" prefHeight="20.0" prefWidth="79.0" text="Add Entity" textFill="#2f3c7e" />
+                        <Button fx:id="addEntity" layoutX="272.0" layoutY="472.0" mnemonicParsing="false" onAction="#addEntityToWorld" prefHeight="20.0" prefWidth="79.0" text="Add Entity" textFill="#053c5e" />
                      </children>
             </AnchorPane>
           </content>
         </ScrollPane>
-        <AnchorPane prefHeight="550.0" prefWidth="328.0">
+        <AnchorPane prefHeight="550.0" prefWidth="328.0" style="-fx-background-color: #A9ACA9;">
                <children>
-                  <Label layoutX="75.0" layoutY="14.0" text="Details" textAlignment="CENTER" textFill="#2f3c7e">
+                  <Label layoutX="75.0" layoutY="14.0" text="Details" textAlignment="CENTER" textFill="#053c5e">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
@@ -120,7 +119,7 @@
                   <TextArea fx:id="worldDetailsOutput" layoutX="19.0" layoutY="68.0" prefHeight="226.0" prefWidth="188.0" />
                   <TextField fx:id="rowDetailLocation" layoutX="43.0" layoutY="319.0" prefHeight="25.0" prefWidth="64.0" promptText="Row" />
                   <TextField fx:id="columnDetailLocation" layoutX="118.0" layoutY="319.0" prefHeight="25.0" prefWidth="71.0" promptText="Column" />
-                  <Button layoutX="74.0" layoutY="352.0" mnemonicParsing="false" onAction="#getDetails" prefHeight="25.0" prefWidth="88.0" text="Get Details" textFill="#2f3c7e" />
+                  <Button layoutX="74.0" layoutY="352.0" mnemonicParsing="false" onAction="#getDetails" prefHeight="25.0" prefWidth="88.0" text="Get Details" textFill="#053c5e" />
                   <Label layoutX="52.0" layoutY="413.0" text="Delete Entity" textFill="#d45a5a">
                      <font>
                         <Font name="System Bold" size="20.0" />
@@ -133,20 +132,17 @@
         </AnchorPane>
       </items>
     </SplitPane>
-    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" style="-fx-background-color: #A9ACA9;" VBox.vgrow="NEVER">
       <children>
-        <Label fx:id="leftStatus" maxHeight="1.7976931348623157E308" maxWidth="-1.0" prefHeight="16.0" prefWidth="410.0" HBox.hgrow="ALWAYS">
+        <Label fx:id="leftStatus" maxHeight="1.7976931348623157E308" maxWidth="-1.0" prefHeight="16.0" prefWidth="220.0" textFill="RED" HBox.hgrow="ALWAYS">
           <font>
-            <Font size="11.0" fx:id="x3" />
+            <Font name="System Bold Italic" size="11.0" fx:id="x3" />
           </font>
-          <textFill>
-            <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
-          </textFill>
         </Label>
         <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
-        <Label fx:id="rightStatus" maxWidth="-1.0" prefHeight="16.0" prefWidth="437.0" textAlignment="RIGHT" textFill="$x4" HBox.hgrow="NEVER">
+        <Label fx:id="rightStatus" maxWidth="-1.0" prefHeight="16.0" prefWidth="225.0" textAlignment="RIGHT" textFill="LIME" HBox.hgrow="NEVER">
                <font>
-                  <Font size="11.0" />
+                  <Font name="System Bold Italic" size="11.0" />
                </font></Label>
       </children>
       <padding>

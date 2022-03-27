@@ -1,5 +1,7 @@
 package mvh.app;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -8,6 +10,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import mvh.enums.WeaponType;
 import mvh.util.Reader;
 import mvh.world.*;
 
@@ -40,18 +43,18 @@ public class MainController {
             worldRows.clear();
             worldColumns.clear();
             //Updating Status
-            leftStatus.setText("World Drawn!");
-            rightStatus.setText("");
+            rightStatus.setText("World Drawn!");
+            leftStatus.setText("");
         }catch (IndexOutOfBoundsException e){
             //TODO Change font color to red. Change alignment of text
             //Updating Status
-            rightStatus.setText("Exceeds max world size!");
-            leftStatus.setText("");
+            leftStatus.setText("Exceeds max world size!");
+            rightStatus.setText("");
         }
         catch (IllegalArgumentException e){
             //Updating Status
-            rightStatus.setText("Invalid world properties!");
-            leftStatus.setText("");
+            leftStatus.setText("Invalid world properties!");
+            rightStatus.setText("");
         }
 
     }
@@ -95,7 +98,7 @@ public class MainController {
     private TextField monsterSymbol;
 
     @FXML
-    private ComboBox<?> monsterWeapon;
+    private ComboBox<WeaponType> monsterWeapon;
 
     @FXML
     private TextField worldColumns;
@@ -135,7 +138,7 @@ public class MainController {
         fileChooser.setTitle("Save World File");
         File file = fileChooser.showSaveDialog(new Stage());
         if(file != null){
-            Reader.saveFile(file);
+            Reader.saveFile(file, world);
             leftStatus.setText("Saved World to file!");
             rightStatus.setText("");
         }
@@ -161,12 +164,22 @@ public class MainController {
     void heroSelected(ActionEvent event) {
         removeMonsterStyling();
         //Adding Styling so that borders are outlined red of various text fields
-        heroSymbol.setStyle("-fx-text-box-border: #d45a5a; -fx-focus-color: #d45a5a;");
-        heroHealth.setStyle("-fx-text-box-border: #d45a5a; -fx-focus-color: #d45a5a;");
-        heroArmor.setStyle("-fx-text-box-border: #d45a5a; -fx-focus-color: #d45a5a;");
-        heroWeapon.setStyle("-fx-text-box-border: #d45a5a; -fx-focus-color: #d45a5a;");
-        entityRow.setStyle("-fx-text-box-border: #d45a5a; -fx-focus-color: #d45a5a;");
-        entityColumn.setStyle("-fx-text-box-border: #d45a5a; -fx-focus-color: #d45a5a;");
+        heroSymbol.setStyle("-fx-text-box-border: #FF0000; -fx-focus-color: #FF0000;");
+        heroHealth.setStyle("-fx-text-box-border: #FF0000; -fx-focus-color: #FF0000;");
+        heroArmor.setStyle("-fx-text-box-border: #FF0000; -fx-focus-color: #FF0000;");
+        heroWeapon.setStyle("-fx-text-box-border: #FF0000; -fx-focus-color: #FF0000;");
+        entityRow.setStyle("-fx-text-box-border: #FF0000; -fx-focus-color: #FF0000;");
+        entityColumn.setStyle("-fx-text-box-border: #FF0000; -fx-focus-color: #FF0000;");
+    }
+
+    @FXML
+    void monsterSelected(ActionEvent event) {
+        removeHeroStyling();
+        //Adding Styling so that borders are outlined red of various text fields
+        monsterHealth.setStyle("-fx-text-box-border: #FF0000; -fx-focus-color: #FF0000;");
+        monsterSymbol.setStyle("-fx-text-box-border: #FF0000; -fx-focus-color: #FF0000;");
+        entityRow.setStyle("-fx-text-box-border: #FF0000; -fx-focus-color: #FF0000;");
+        entityColumn.setStyle("-fx-text-box-border: #FF0000; -fx-focus-color: #FF0000;");
     }
 
     private void removeMonsterStyling() {
@@ -175,16 +188,6 @@ public class MainController {
         monsterWeapon.setStyle(null);
         entityRow.setStyle(null);
         entityColumn.setStyle(null);
-    }
-
-    @FXML
-    void monsterSelected(ActionEvent event) {
-        removeHeroStyling();
-        //Adding Styling so that borders are outlined red of various text fields
-        monsterHealth.setStyle("-fx-text-box-border: #d45a5a; -fx-focus-color: #d45a5a;");
-        monsterSymbol.setStyle("-fx-text-box-border: #d45a5a; -fx-focus-color: #d45a5a;");
-        entityRow.setStyle("-fx-text-box-border: #d45a5a; -fx-focus-color: #d45a5a;");
-        entityColumn.setStyle("-fx-text-box-border: #d45a5a; -fx-focus-color: #d45a5a;");
     }
 
     private void removeHeroStyling() {
@@ -206,10 +209,45 @@ public class MainController {
     private ToggleGroup entityGroup;
 
     public void addEntityToWorld(ActionEvent actionEvent) {
-        //TODO add Entity to World
+        leftStatus.setText("");
+        try {
+            if (selectMonster.isSelected()) {
+                try {
+                    Monster monster = new Monster(Integer.parseInt(monsterHealth.getText()), monsterSymbol.getText().charAt(0), monsterWeapon.getValue());
+                    world.addEntity(Integer.parseInt(entityRow.getText()), Integer.parseInt(entityColumn.getText()), monster);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    rightStatus.setText("Outside World!");
+                }
 
+            } else if (selectHero.isSelected()) {
+                try {
+                    Hero hero = new Hero(Integer.parseInt(heroHealth.getText()), heroSymbol.getText().charAt(0), Integer.parseInt(heroWeapon.getText()), Integer.parseInt(heroArmor.getText()));
+                    world.addEntity(Integer.parseInt(entityRow.getText()), Integer.parseInt(entityColumn.getText()), hero);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    leftStatus.setText("Outside World!");
+                    rightStatus.setText("");
+                }
+            }else{
+                leftStatus.setText("Select Entity Type!");
+                rightStatus.setText("");
+            }
+            updateWorldInfo();
+        }catch (NullPointerException e){
+            leftStatus.setText("No Existing world!");
+            rightStatus.setText("");
+        }catch (IllegalArgumentException e){
+            leftStatus.setText("Invalid Entries!");
+            rightStatus.setText("");
+        }
         //Removing Styling
         removeHeroStyling();
         removeMonsterStyling();
+    }
+
+    @FXML
+    private void initialize() {
+        ObservableList<WeaponType> weapons = FXCollections.observableArrayList(WeaponType.CLUB, WeaponType.AXE, WeaponType.SWORD);
+        monsterWeapon.setValue(WeaponType.CLUB);
+        monsterWeapon.setItems(weapons);
     }
 }
