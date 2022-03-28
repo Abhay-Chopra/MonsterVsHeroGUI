@@ -36,7 +36,9 @@ public class MainController {
         try {
             int rows = Integer.parseInt(worldRows.getText());
             int columns = Integer.parseInt(worldColumns.getText());
-            if(rows > 20 || columns > 20){throw new IndexOutOfBoundsException();}
+            if (rows > 20 || columns > 20) {
+                throw new IndexOutOfBoundsException();
+            }
             world = new World(rows, columns);
             updateWorldInfo();
             //Cleaning Up Text Fields
@@ -45,13 +47,12 @@ public class MainController {
             //Updating Status
             rightStatus.setText("World Drawn!");
             leftStatus.setText("");
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             //TODO Change font color to red. Change alignment of text
             //Updating Status
             leftStatus.setText("Exceeds max world size!");
             rightStatus.setText("");
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             //Updating Status
             leftStatus.setText("Invalid world properties!");
             rightStatus.setText("");
@@ -117,13 +118,25 @@ public class MainController {
     @FXML
     private TextArea worldDetailsOutput;
 
+    @FXML
+    private TextField rowDetailLocation;
+
+    @FXML
+    private TextField columnDetailLocation;
+
+    @FXML
+    private TextField deleteColumnLocation;
+
+    @FXML
+    private TextField deleteRowLocation;
+
     //Methods for loading, saving, and quitting from file
     @FXML
     void loadFile(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load World File");
         File file = fileChooser.showOpenDialog(new Stage());
-        if(file != null){
+        if (file != null) {
             world = Reader.loadWorld(file);
             updateWorldInfo();
             //Updating Status to reflect change
@@ -137,7 +150,7 @@ public class MainController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save World File");
         File file = fileChooser.showSaveDialog(new Stage());
-        if(file != null){
+        if (file != null) {
             Reader.saveFile(file, world);
             leftStatus.setText("Saved World to file!");
             rightStatus.setText("");
@@ -158,6 +171,42 @@ public class MainController {
     //Should get details from world, at detailRow, detailColumn
     @FXML
     void getDetails(ActionEvent event) {
+        try{
+            int row = Integer.parseInt(rowDetailLocation.getText());
+            int column = Integer.parseInt(columnDetailLocation.getText());
+            if(world.getEntity(row, column) != null){
+                String locationDetail = "";
+                if(world.getEntity(row, column).getClass() == Hero.class) {
+                    locationDetail = String.format("Type: Hero%nSymbol: %s%nHealth: %s%nWeapon Strength: %s%nArmor Strength: %s", world.getEntity(row, column).getSymbol(), world.getEntity(row, column).getHealth(), world.getEntity(row, column).weaponStrength(), world.getEntity(row, column).armorStrength());
+                }else if(world.getEntity(row, column).getClass() == Monster.class){
+                    //Getting Weapon Type for Monster
+                    WeaponType weaponType;
+                    int weaponStrength = world.getEntity(row, column).weaponStrength();
+                    if(weaponStrength == 2){
+                        weaponType = WeaponType.CLUB;
+                    }else if(weaponStrength == 3){
+                        weaponType = WeaponType.AXE;
+                    }else{
+                        weaponType = WeaponType.SWORD;
+                    }
+                    locationDetail = String.format("Type: Monster%nSymbol: %s%nHealth: %s%nWeapon: %s%nWeapon Strength: %s", world.getEntity(row, column).getSymbol(), world.getEntity(row, column).getHealth(), weaponType.name(), world.getEntity(row, column).weaponStrength());
+                }
+                worldDetailsOutput.setText(locationDetail);
+            }else{
+                worldDetailsOutput.setText("No existing entity at location!");
+            }
+            leftStatus.setText("");
+            rightStatus.setText("Details Provided!");
+        }catch (IllegalArgumentException e){
+            leftStatus.setText("Row, Column should be integers!");
+            rightStatus.setText("");
+        }catch (ArrayIndexOutOfBoundsException e){
+            leftStatus.setText("Location outside world!");
+            rightStatus.setText("");
+        }catch (NullPointerException e){
+            leftStatus.setText("No Created World!");
+            rightStatus.setText("");
+        }
     }
 
     @FXML
@@ -227,15 +276,15 @@ public class MainController {
                     leftStatus.setText("Outside World!");
                     rightStatus.setText("");
                 }
-            }else{
+            } else {
                 leftStatus.setText("Select Entity Type!");
                 rightStatus.setText("");
             }
             updateWorldInfo();
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             leftStatus.setText("No Existing world!");
             rightStatus.setText("");
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             leftStatus.setText("Invalid Entries!");
             rightStatus.setText("");
         }
@@ -249,5 +298,24 @@ public class MainController {
         ObservableList<WeaponType> weapons = FXCollections.observableArrayList(WeaponType.CLUB, WeaponType.AXE, WeaponType.SWORD);
         monsterWeapon.setValue(WeaponType.CLUB);
         monsterWeapon.setItems(weapons);
+    }
+
+    @FXML
+    void deleteEntity(ActionEvent event) {
+        try {
+            world.addEntity(Integer.parseInt(deleteRowLocation.getText()), Integer.parseInt(deleteColumnLocation.getText()),null);
+            updateWorldInfo();
+            rightStatus.setText("Deleted Entity!");
+            leftStatus.setText("");
+        }catch (IndexOutOfBoundsException e) {
+            leftStatus.setText("Deletion locations outside world!");
+            rightStatus.setText("");
+        }catch (IllegalArgumentException e){
+            leftStatus.setText("Deletion locations should be integers!");
+            rightStatus.setText("");
+        }catch (NullPointerException e){
+            leftStatus.setText("No World created!");
+            rightStatus.setText("");
+        }
     }
 }
