@@ -7,7 +7,6 @@ import mvh.world.World;
 
 import java.io.*;
 
-//TODO invalid files should cause an update status instead of overwriting files
 
 /**
  * Class to assist reading in world file
@@ -18,13 +17,11 @@ public final class Reader {
 
     /**
      * Load the world from the given file
-     * (Do not expect students to create anything near as robust as this file reading method!)
-     * (A better design would also use sub-functions.)
      *
      * @param worldFile The world file to load
      * @return A World created from the world file
      */
-    public static World loadWorld(File worldFile){
+    public static World loadWorld(File worldFile) throws RuntimeException{
         World world = null;
         //reconfirming that file can be accessed
         if(worldFile.isFile() && worldFile.canRead() && worldFile.exists()){
@@ -46,8 +43,8 @@ public final class Reader {
                             //Reading and splitting a line
                             String[] lineInfo = line.split(",");
                             //Initializing vars for current line
-                            int row = 0;
-                            int column = 0;
+                            int row;
+                            int column;
                             try{
                                 //Initializing info common between Entities
                                 row = Integer.parseInt(lineInfo[0]);
@@ -56,12 +53,8 @@ public final class Reader {
                                 {
                                     throw new Exception("Skipped row or column");
                                 }
-                            }catch (ArrayIndexOutOfBoundsException e){
-                                System.err.println("Invalid entries in world file!");
-                                System.exit(1);
-                            } catch (Exception e) {
-                                System.err.println("Invalid entries within world file!");
-                                System.exit(1);
+                            } catch (Exception e){
+                                throw new RuntimeException("Invalid entries within world file!");
                             }
                             //Conditional for handling non-floor entities in row, column
                             if(lineInfo.length > 2 && lineInfo.length <= 7)
@@ -88,23 +81,16 @@ public final class Reader {
                                     world.addEntity(row, column, hero);
                                 }
                             } else if (lineInfo.length > 7){
-                                System.err.println("Too many values in line of provided world file!");
-                                System.exit(1);
+                                throw new RuntimeException("Too many values in line of provided world file!");
                             }
                             line = bufferedReader.readLine();
                         }
                     }
                 }
             }catch (NumberFormatException e){
-                System.err.println("Couldn't read from file! Missing world row or colum size!");
-                System.exit(1);
-            }
-            catch (FileNotFoundException e) {
-                System.err.println("Could not find file: " + worldFile.getAbsolutePath());
-                System.exit(1);
+                throw new RuntimeException("Missing row or colum size in world file!");
             } catch (IOException e) {
-                System.err.println("Could not close file: " + worldFile.getAbsolutePath());
-                System.exit(1);
+                throw new RuntimeException("Could not find file!");
             }
         }
         return world;
@@ -112,6 +98,7 @@ public final class Reader {
 
     /**
      * Saves world information to desired file
+     *
      * @param file File to save to
      */
     public static void saveFile(File file, World world) {
@@ -154,8 +141,7 @@ public final class Reader {
             }
             //Catching exceptions when file writing is interrupted
             catch (IOException e) {
-                System.err.println("Error writing to file " + file);
-                System.exit(1);
+                throw new RuntimeException("Invalid world file!");
             }
         }
     }
