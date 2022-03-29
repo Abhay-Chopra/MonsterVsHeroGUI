@@ -75,12 +75,12 @@
                   <Label layoutX="17.0" layoutY="274.0" prefHeight="25.0" prefWidth="46.0" text="Weapon" />
                   <Label layoutX="17.0" layoutY="464.0" prefHeight="25.0" prefWidth="46.0" text="Weapon" />
                   <Label layoutX="21.0" layoutY="306.0" prefHeight="25.0" prefWidth="46.0" text="Armor" />
-                  <TextField fx:id="heroSymbol" layoutX="74.0" layoutY="205.0" prefHeight="16.0" prefWidth="79.0" promptText="symbol" />
-                  <TextField fx:id="heroHealth" layoutX="74.0" layoutY="240.0" prefHeight="25.0" prefWidth="79.0" promptText="health" />
-                  <TextField fx:id="heroWeapon" layoutX="74.0" layoutY="274.0" prefHeight="25.0" prefWidth="79.0" promptText="strength" />
-                  <TextField fx:id="heroArmor" layoutX="74.0" layoutY="306.0" prefHeight="25.0" prefWidth="79.0" promptText="armor" />
-                  <TextField fx:id="monsterSymbol" layoutX="71.0" layoutY="393.0" prefHeight="25.0" prefWidth="79.0" promptText="symbol" />
-                  <TextField fx:id="monsterHealth" layoutX="71.0" layoutY="431.0" prefHeight="25.0" prefWidth="79.0" promptText="health" />
+                  <TextField fx:id="heroSymbol" layoutX="74.0" layoutY="205.0" prefHeight="16.0" prefWidth="79.0" promptText="H" />
+                  <TextField fx:id="heroHealth" layoutX="74.0" layoutY="240.0" prefHeight="25.0" prefWidth="79.0" promptText="10" />
+                  <TextField fx:id="heroWeapon" layoutX="74.0" layoutY="274.0" prefHeight="25.0" prefWidth="79.0" promptText="3" />
+                  <TextField fx:id="heroArmor" layoutX="74.0" layoutY="306.0" prefHeight="25.0" prefWidth="79.0" promptText="3" />
+                  <TextField fx:id="monsterSymbol" layoutX="71.0" layoutY="393.0" prefHeight="25.0" prefWidth="79.0" promptText="M" />
+                  <TextField fx:id="monsterHealth" layoutX="71.0" layoutY="431.0" prefHeight="25.0" prefWidth="79.0" promptText="10" />
                   <ComboBox fx:id="monsterWeapon" layoutX="71.0" layoutY="464.0" prefHeight="25.0" prefWidth="79.0" promptText="Type" />
           </children>
         </AnchorPane>
@@ -127,20 +127,20 @@
                   </Label>
                   <TextField fx:id="deleteRowLocation" layoutX="42.0" layoutY="457.0" prefHeight="25.0" prefWidth="64.0" promptText="Row" />
                   <TextField fx:id="deleteColumnLocation" layoutX="118.0" layoutY="457.0" prefHeight="25.0" prefWidth="71.0" promptText="Column" />
-                  <Button layoutX="74.0" layoutY="494.0" mnemonicParsing="false" onAction="#getDetails" prefHeight="25.0" prefWidth="88.0" text="Delete" textFill="#d45a5a" />
+                  <Button layoutX="74.0" layoutY="494.0" mnemonicParsing="false" onAction="#deleteEntity" prefHeight="25.0" prefWidth="88.0" text="Delete" textFill="#d45a5a" />
                </children>
         </AnchorPane>
       </items>
     </SplitPane>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" style="-fx-background-color: #A9ACA9;" VBox.vgrow="NEVER">
       <children>
-        <Label fx:id="leftStatus" maxHeight="1.7976931348623157E308" maxWidth="-1.0" prefHeight="16.0" prefWidth="220.0" textFill="RED" HBox.hgrow="ALWAYS">
+        <Label fx:id="leftStatus" maxHeight="1.7976931348623157E308" maxWidth="-1.0" prefHeight="16.0" prefWidth="440.0" textFill="RED" HBox.hgrow="ALWAYS">
           <font>
             <Font name="System Bold Italic" size="11.0" fx:id="x3" />
           </font>
         </Label>
-        <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
-        <Label fx:id="rightStatus" maxWidth="-1.0" prefHeight="16.0" prefWidth="225.0" textAlignment="RIGHT" textFill="LIME" HBox.hgrow="NEVER">
+        <Pane HBox.hgrow="ALWAYS" />
+        <Label fx:id="rightStatus" maxWidth="-1.0" prefHeight="16.0" prefWidth="469.0" textAlignment="RIGHT" textFill="LIME" HBox.hgrow="NEVER">
                <font>
                   <Font name="System Bold Italic" size="11.0" />
                </font></Label>
