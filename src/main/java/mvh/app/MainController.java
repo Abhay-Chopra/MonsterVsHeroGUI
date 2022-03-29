@@ -24,7 +24,7 @@ public class MainController {
 
     //Alert for when Help clicked (info about program)
     @FXML
-    public void helpPopUp(ActionEvent actionEvent) {
+    public void helpPopUp(ActionEvent ignoredEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About this Application");
         alert.setContentText("Author: Abhay Chopra\nEmail: abhay.chopra1@ucalgary.ca\nVersion: v1.0\nThis is a world editor for Monster Versus Heroes!");
@@ -32,7 +32,7 @@ public class MainController {
     }
 
     @FXML
-    void createNewWorld(ActionEvent event) {
+    void createNewWorld(ActionEvent ignoredEvent) {
         try {
             int rows = Integer.parseInt(worldRows.getText());
             int columns = Integer.parseInt(worldColumns.getText());
@@ -69,7 +69,7 @@ public class MainController {
     private Label rightStatus;
 
     @FXML
-    private Label leftStatus;
+    public Label leftStatus;
 
     @FXML
     private Button addEntity;
@@ -132,33 +132,42 @@ public class MainController {
 
     //Methods for loading, saving, and quitting from file
     @FXML
-    void loadFile(ActionEvent event) {
+    void loadFile(ActionEvent ignoredEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load World File");
         File file = fileChooser.showOpenDialog(new Stage());
         if (file != null) {
-            world = Reader.loadWorld(file);
-            updateWorldInfo();
-            //Updating Status to reflect change
-            leftStatus.setText("Loaded World!");
-            rightStatus.setText("");
+            try {
+                world = Reader.loadWorld(file);
+                updateWorldInfo();
+                //Updating Status to reflect change
+                rightStatus.setText("Loaded World!");
+                leftStatus.setText("");
+            }catch (RuntimeException e){
+                leftStatus.setText(e.getMessage());
+            }
         }
     }
 
     @FXML
-    void saveFile(ActionEvent event) {
+    void saveFile(ActionEvent ignoredEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save World File");
         File file = fileChooser.showSaveDialog(new Stage());
         if (file != null) {
-            Reader.saveFile(file, world);
-            leftStatus.setText("Saved World to file!");
-            rightStatus.setText("");
+            try {
+                Reader.saveFile(file, world);
+                leftStatus.setText("");
+                rightStatus.setText("Saved World to file!");
+            }catch (RuntimeException e){
+                leftStatus.setText(e.toString());
+                rightStatus.setText("");
+            }
         }
     }
 
     @FXML
-    void quitWindow(ActionEvent event) {
+    void quitWindow(ActionEvent ignoredEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Exit");
         alert.setContentText("Are you sure you want to exit?");
@@ -170,7 +179,7 @@ public class MainController {
 
     //Should get details from world, at detailRow, detailColumn
     @FXML
-    void getDetails(ActionEvent event) {
+    void getDetails(ActionEvent ignoredEvent) {
         try{
             int row = Integer.parseInt(rowDetailLocation.getText());
             int column = Integer.parseInt(columnDetailLocation.getText());
@@ -210,7 +219,7 @@ public class MainController {
     }
 
     @FXML
-    void heroSelected(ActionEvent event) {
+    void heroSelected(ActionEvent ignoredEvent) {
         removeMonsterStyling();
         //Adding Styling so that borders are outlined red of various text fields
         heroSymbol.setStyle("-fx-text-box-border: #FF0000; -fx-focus-color: #FF0000;");
@@ -222,7 +231,7 @@ public class MainController {
     }
 
     @FXML
-    void monsterSelected(ActionEvent event) {
+    void monsterSelected(ActionEvent ignoredEvent) {
         removeHeroStyling();
         //Adding Styling so that borders are outlined red of various text fields
         monsterHealth.setStyle("-fx-text-box-border: #FF0000; -fx-focus-color: #FF0000;");
@@ -257,7 +266,8 @@ public class MainController {
     @FXML
     private ToggleGroup entityGroup;
 
-    public void addEntityToWorld(ActionEvent actionEvent) {
+    @FXML
+    public void addEntityToWorld(ActionEvent ignoredEvent) {
         leftStatus.setText("");
         try {
             if (selectMonster.isSelected()) {
@@ -301,7 +311,7 @@ public class MainController {
     }
 
     @FXML
-    void deleteEntity(ActionEvent event) {
+    void deleteEntity(ActionEvent ignoredEvent) {
         try {
             world.addEntity(Integer.parseInt(deleteRowLocation.getText()), Integer.parseInt(deleteColumnLocation.getText()),null);
             updateWorldInfo();
