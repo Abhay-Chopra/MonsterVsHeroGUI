@@ -17,6 +17,11 @@ import mvh.world.*;
 import java.io.File;
 import java.util.Optional;
 
+/**
+ * Controller that handles all connections between stage and Main.fxml
+ * @author Abhay Chopra
+ * @version v1.0
+ */
 public class MainController {
 
     //Store the data of editor
@@ -27,7 +32,7 @@ public class MainController {
     public void helpPopUp(ActionEvent ignoredEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About this Application");
-        alert.setContentText("Author: Abhay Chopra\nEmail: abhay.chopra1@ucalgary.ca\nVersion: v1.0\nThis is a world editor for Monster Versus Heroes!");
+        alert.setContentText("Author: Abhay Chopra\nEmail: abhay.chopra1@ucalgary.ca\nVersion: v1.0\nTA: Amir (Tutorial 06)\nThis is a world editor for Monster Versus Heroes!");
         alert.show();
     }
 
@@ -48,7 +53,6 @@ public class MainController {
             rightStatus.setText("World Drawn!");
             leftStatus.setText("");
         } catch (IndexOutOfBoundsException e) {
-            //TODO Change font color to red. Change alignment of text
             //Updating Status
             leftStatus.setText("Exceeds max world size!");
             rightStatus.setText("");
@@ -131,6 +135,11 @@ public class MainController {
     private TextField deleteRowLocation;
 
     //Methods for loading, saving, and quitting from file
+
+    /**
+     * Uses FileChooser to load a file and uses reader to read from file to create a new world
+     * @param ignoredEvent Event on load clicked
+     */
     @FXML
     void loadFile(ActionEvent ignoredEvent) {
         FileChooser fileChooser = new FileChooser();
@@ -158,7 +167,7 @@ public class MainController {
             try {
                 Reader.saveFile(file, world);
                 leftStatus.setText("");
-                rightStatus.setText("Saved World to file!");
+                rightStatus.setText("Saved World!");
             }catch (RuntimeException e){
                 leftStatus.setText(e.toString());
                 rightStatus.setText("");
@@ -205,7 +214,7 @@ public class MainController {
                 worldDetailsOutput.setText("No existing entity at location!");
             }
             leftStatus.setText("");
-            rightStatus.setText("Details Provided!");
+            rightStatus.setText("Details Updated!");
         }catch (IllegalArgumentException e){
             leftStatus.setText("Row, Column should be integers!");
             rightStatus.setText("");
@@ -275,7 +284,8 @@ public class MainController {
                     Monster monster = new Monster(Integer.parseInt(monsterHealth.getText()), monsterSymbol.getText().charAt(0), monsterWeapon.getValue());
                     world.addEntity(Integer.parseInt(entityRow.getText()), Integer.parseInt(entityColumn.getText()), monster);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    rightStatus.setText("Outside World!");
+                    leftStatus.setText("Outside World!");
+                    rightStatus.setText("");
                 }
 
             } else if (selectHero.isSelected()) {
@@ -291,6 +301,7 @@ public class MainController {
                 rightStatus.setText("");
             }
             updateWorldInfo();
+            rightStatus.setText("Added Entity!");
         } catch (NullPointerException e) {
             leftStatus.setText("No Existing world!");
             rightStatus.setText("");
