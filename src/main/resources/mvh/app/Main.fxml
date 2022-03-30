@@ -50,8 +50,8 @@
                   <Label layoutX="21.0" layoutY="87.0" text="Columns" />
                   <Label layoutX="20.0" layoutY="393.0" prefHeight="25.0" prefWidth="40.0" text="Symbol" />
                   <Label layoutX="24.0" layoutY="431.0" prefHeight="25.0" prefWidth="40.0" text="Health" />
-                  <TextField fx:id="worldRows" layoutX="74.0" layoutY="51.0" prefHeight="25.0" prefWidth="79.0" promptText="0 to 15" />
-                  <TextField fx:id="worldColumns" layoutX="74.0" layoutY="83.0" prefHeight="25.0" prefWidth="79.0" promptText="0 to 15" />
+                  <TextField fx:id="worldRows" layoutX="74.0" layoutY="51.0" prefHeight="25.0" prefWidth="79.0" promptText="1 to 25" />
+                  <TextField fx:id="worldColumns" layoutX="74.0" layoutY="83.0" prefHeight="25.0" prefWidth="79.0" promptText="1 to 25" />
                   <RadioButton fx:id="selectHero" layoutX="53.0" layoutY="175.0" mnemonicParsing="false" onAction="#heroSelected" prefHeight="21.0" prefWidth="94.0" text="Hero" textFill="#053c5e">
                      <font>
                         <Font name="System Bold" size="15.0" />
