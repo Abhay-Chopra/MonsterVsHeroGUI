@@ -228,7 +228,7 @@ public class World {
         int rowLength = getRows();
         int columnLength = getColumns();
         //Added two to the length of one row, to get the top and bottom wall
-        wall.append(String.valueOf(Symbol.WALL.getSymbol() + "\t").repeat(columnLength + 2));
+        wall.append((Symbol.WALL.getSymbol() + "\t").repeat(columnLength + 2));
         StringBuilder innerMap = new StringBuilder();
         for(int row = 0; row < rowLength; row++)
         {
