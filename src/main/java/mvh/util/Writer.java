@@ -7,6 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * Class to assist writing in world file
+ * @author Jonathan Hudson, Abhay Chopra
+ * @version 1.1
+ */
 public class Writer {
     /**
      * Saves world information to desired file

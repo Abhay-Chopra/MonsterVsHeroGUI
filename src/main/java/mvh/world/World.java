@@ -219,7 +219,7 @@ public class World {
     }
 
     /**
-     * Creating a string that represents and visualizes the current world
+     * Creating a string that represents and visualizes the current world (added tabs for clearer printing)
      *
      * @return String that contains a visualization of the world, including all entities represented by symbols
      */
