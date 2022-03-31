@@ -408,6 +408,7 @@ public class MainController {
                     //Creating a monster entity using info provided and adding to world
                     Monster monster = new Monster(Integer.parseInt(monsterHealth.getText()), monsterSymbol.getText().charAt(0), monsterWeapon.getValue());
                     world.addEntity(Integer.parseInt(entityRow.getText()), Integer.parseInt(entityColumn.getText()), monster);
+                    rightStatus.setText("Added Entity!");
                 }
                 //Handling locations outside of world
                 catch (ArrayIndexOutOfBoundsException e) {
@@ -421,6 +422,7 @@ public class MainController {
                     //Creating a hero entity using info provided and adding to world
                     Hero hero = new Hero(Integer.parseInt(heroHealth.getText()), heroSymbol.getText().charAt(0), Integer.parseInt(heroWeapon.getText()), Integer.parseInt(heroArmor.getText()));
                     world.addEntity(Integer.parseInt(entityRow.getText()), Integer.parseInt(entityColumn.getText()), hero);
+                    rightStatus.setText("Added Entity!");
                 }
                 //Handling locations outside of world
                 catch (ArrayIndexOutOfBoundsException e) {
@@ -434,7 +436,6 @@ public class MainController {
                 rightStatus.setText("");
             }
             updateWorldInfo();
-            rightStatus.setText("Added Entity!");
         }
         //Handling exceptions that arise from no world created or invalid information given
         catch (NullPointerException e) {
