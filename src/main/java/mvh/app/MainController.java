@@ -413,7 +413,11 @@ public class MainController {
                 }
                 //Handling locations outside of world
                 catch (ArrayIndexOutOfBoundsException e) {
-                    leftStatus.setText("Outside World!");
+                    leftStatus.setText("Location Outside World!");
+                    rightStatus.setText("");
+                }
+                catch (StringIndexOutOfBoundsException e){
+                    leftStatus.setText("No Symbol Provided!");
                     rightStatus.setText("");
                 }
             }
@@ -428,7 +432,11 @@ public class MainController {
                 }
                 //Handling locations outside of world
                 catch (ArrayIndexOutOfBoundsException e) {
-                    leftStatus.setText("Outside World!");
+                    leftStatus.setText("Location Outside World!");
+                    rightStatus.setText("");
+                }
+                catch (StringIndexOutOfBoundsException e){
+                    leftStatus.setText("No Symbol Provided!");
                     rightStatus.setText("");
                 }
             }
@@ -447,7 +455,7 @@ public class MainController {
             leftStatus.setText("Invalid Entries!");
             rightStatus.setText("");
         }
-        //Removing Styling
+        //Removing styling from fields
         removeHeroStyling();
         removeMonsterStyling();
     }
