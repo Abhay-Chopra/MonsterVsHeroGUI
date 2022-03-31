@@ -19,6 +19,9 @@ public class Writer {
      * @param file File (from FileChooser) to save world data to
      */
     public static void saveFile(File file, World world) {
+        if(world == null){
+            throw new RuntimeException("No current world!");
+        }
         if(file.exists() && file.isFile() && file.canWrite()){
             //with-resources method of creating file and print writer
             try(FileWriter fileWriter = new FileWriter(file);

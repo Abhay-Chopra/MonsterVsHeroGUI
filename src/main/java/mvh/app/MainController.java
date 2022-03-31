@@ -237,7 +237,7 @@ public class MainController {
                 leftStatus.setText("");
                 rightStatus.setText("Saved World!");
             }catch (RuntimeException e){
-                leftStatus.setText(e.toString());
+                leftStatus.setText(e.getMessage());
                 rightStatus.setText("");
             }
         }
