@@ -405,6 +405,10 @@ public class MainController {
             //Handling Monsters
             if (selectMonster.isSelected()) {
                 try {
+                    //Checking values for validity
+                    if(Integer.parseInt(monsterHealth.getText()) < 0){
+                        throw new RuntimeException("Health must be a positive value!");
+                    }
                     //Creating a monster entity using info provided and adding to world
                     Monster monster = new Monster(Integer.parseInt(monsterHealth.getText()), monsterSymbol.getText().charAt(0), monsterWeapon.getValue());
                     world.addEntity(Integer.parseInt(entityRow.getText()), Integer.parseInt(entityColumn.getText()), monster);
@@ -424,6 +428,16 @@ public class MainController {
             //Handling Hero
             else if (selectHero.isSelected()) {
                 try {
+                    //Checking values provided by user for validity
+                    if(Integer.parseInt(heroWeapon.getText()) < 0){
+                        throw new RuntimeException("Weapon Strength must be a positive value!");
+                    }
+                    if(Integer.parseInt(heroArmor.getText()) < 0){
+                        throw new RuntimeException("Armor Strength must be a positive value!");
+                    }
+                    if(Integer.parseInt(heroHealth.getText()) < 0){
+                        throw new RuntimeException("Health must be a positive value!");
+                    }
                     //Creating a hero entity using info provided and adding to world
                     Hero hero = new Hero(Integer.parseInt(heroHealth.getText()), heroSymbol.getText().charAt(0), Integer.parseInt(heroWeapon.getText()), Integer.parseInt(heroArmor.getText()));
                     world.addEntity(Integer.parseInt(entityRow.getText()), Integer.parseInt(entityColumn.getText()), hero);
@@ -452,7 +466,10 @@ public class MainController {
             leftStatus.setText("No Existing world!");
             rightStatus.setText("");
         } catch (IllegalArgumentException e) {
-            leftStatus.setText("Invalid Entries!");
+            leftStatus.setText("Provided entries of wrong type!");
+            rightStatus.setText("");
+        }catch (RuntimeException e){
+            leftStatus.setText(e.getMessage());
             rightStatus.setText("");
         }
         //Removing styling from fields
