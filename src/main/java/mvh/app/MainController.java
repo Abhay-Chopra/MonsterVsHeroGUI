@@ -206,6 +206,7 @@ public class MainController {
     void loadFile(ActionEvent ignoredEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load World File");
+        fileChooser.setInitialDirectory(new File("."));
         File file = fileChooser.showOpenDialog(new Stage());
         //Handling non-null files, i.e. ignoring when no file chosen
         if (file != null) {
@@ -229,6 +230,7 @@ public class MainController {
     void saveFile(ActionEvent ignoredEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save World File");
+        fileChooser.setInitialDirectory(new File("."));
         File file = fileChooser.showSaveDialog(new Stage());
         //Handling non-null files, i.e. ignoring when no file chosen
         if (file != null) {
