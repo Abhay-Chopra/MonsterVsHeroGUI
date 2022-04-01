@@ -405,6 +405,10 @@ public class MainController {
             //Handling Monsters
             if (selectMonster.isSelected()) {
                 try {
+                    //Checking if symbol is valid
+                    if(monsterSymbol.getText().length() > 1){
+                        throw new RuntimeException("Symbol must be one character!");
+                    }
                     //Checking values for validity
                     if(Integer.parseInt(monsterHealth.getText()) < 0){
                         throw new RuntimeException("Health must be a positive value!");
@@ -428,6 +432,10 @@ public class MainController {
             //Handling Hero
             else if (selectHero.isSelected()) {
                 try {
+                    //Checking if symbol is valid
+                    if(heroSymbol.getText().length() > 1){
+                        throw new RuntimeException("Symbol must be one character!");
+                    }
                     //Checking values provided by user for validity
                     if(Integer.parseInt(heroWeapon.getText()) < 0){
                         throw new RuntimeException("Weapon Strength must be a positive value!");

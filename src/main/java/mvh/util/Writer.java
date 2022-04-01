@@ -59,9 +59,12 @@ public class Writer {
                     }
                 }
             }
-            //Catching exceptions when file writing is interrupted
-            catch (IOException e) {
+            catch (IOException e){
                 throw new RuntimeException("Invalid world file!");
+            }
+            //Catching exceptions when file writing is interrupted
+            catch (Exception e) {
+                throw new RuntimeException("Error writing to file!");
             }
         }
     }
