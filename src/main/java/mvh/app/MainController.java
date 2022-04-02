@@ -16,6 +16,7 @@ import mvh.util.Writer;
 import mvh.world.*;
 
 import java.io.File;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -404,12 +405,19 @@ public class MainController {
     @FXML
     public void addEntityToWorld(ActionEvent ignoredEvent) {
         try {
+            if(Objects.equals(entityRow.getText(), "") || Objects.equals(entityColumn.getText(), "")){
+                throw new RuntimeException("Missing location details!");
+            }
             //Handling Monsters
             if (selectMonster.isSelected()) {
                 try {
                     //Checking if symbol is valid
                     if(monsterSymbol.getText().length() > 1){
                         throw new RuntimeException("Symbol must be one character!");
+                    }
+                    //Checking if health value is provided
+                    if(Objects.equals(monsterHealth.getText(), "")){
+                        throw new RuntimeException("Missing health value!");
                     }
                     //Checking values for validity
                     if(Integer.parseInt(monsterHealth.getText()) < 0){
@@ -437,6 +445,10 @@ public class MainController {
                     //Checking if symbol is valid
                     if(heroSymbol.getText().length() > 1){
                         throw new RuntimeException("Symbol must be one character!");
+                    }
+                    //Checking if health value is provided
+                    if(Objects.equals(heroHealth.getText(), "") ||  Objects.equals(heroArmor.getText(), "") || Objects.equals(heroWeapon.getText(), "")){
+                        throw new RuntimeException("Missing entries!");
                     }
                     //Checking values provided by user for validity
                     if(Integer.parseInt(heroWeapon.getText()) < 0){
