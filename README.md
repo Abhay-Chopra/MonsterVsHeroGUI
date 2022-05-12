@@ -1,9 +1,7 @@
-# CPSC233A3
+# Monster VS Hero GUI (JavaFX)
 Project Description: GUI-based editor for Monster vs Hero's simulation game
 
 Authors: Abhay Chopra, Jonathan Hudson
-
-TA: Amir (T06)
 
 Project Internals:
 GUI application, using JavaFX, to get a view of World.java objects created
