@@ -1,4 +1,4 @@
-## Monster VS Hero GUI (JavaFX)
+# Monster VS Hero GUI (JavaFX)
 Project Description: GUI-based editor for Monster vs Hero's simulation game
 
 Authors: Abhay Chopra, Jonathan Hudson
@@ -8,14 +8,14 @@ GUI application, using JavaFX, to get a view of World.java objects created
 through program. Additionally, adds saving and reading from file functionality 
 using FileChooser. Handles various events and incorporates event-driven design.
 
-# Running the Project-from command line (Windows): 
+## Running the Project-from command line (Windows): 
 
 1) Go to directory location with provided .jar file
 2) Launch Command Prompt from directory
 3) Use the following command: java --module-path "Add Path where JavaFx openSDK is located" --add-modules 
 javafx.controls,javafx.fxml -jar CPSC233W22A3.jar
 
-Example run (when running command prompt from location with.jar file):
+### Example run (when running command prompt from location with.jar file):
 java --module-path "C:\Program Files\Java\javafx-sdk-17.0.2\lib" --add-modules javafx.controls,javafx.fxml -jar CPSC233W22A3.jar
 
 
